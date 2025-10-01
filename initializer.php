@@ -9,7 +9,7 @@
  * @author    Anthony Piracini <apiracini@buildingmedia.com>
  */
 // Config file with Globals & Configurations 
-define('APP_MODULE', 'bmidemo');
+define('APP_MODULE', 'module_user');
 $config_path = $_SERVER['DOCUMENT_ROOT'] . '/core/config/';
 // echo "INITIALIZER: config = " . $config_path . 'config.php' . "<br>"; exit(); 
 require($config_path . 'config.php'); 

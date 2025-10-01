@@ -5,7 +5,7 @@
  * @author    Anthony Piracini <apiracini@buildingmedia.com>
 */
 
-require_once($_SERVER['DOCUMENT_ROOT'] . '/core/credit_tracker/initializer.php');
+require_once($_SERVER['DOCUMENT_ROOT'] . '/credit_tracker/initializer.php');
 
 $user_id = getSession(SESSION_USERID_KEY);
 
@@ -37,7 +37,7 @@ switch(APP_MODULE){
 		$visibility_values = getSession('SESSION_VISIBILITY_VALUES');
         break;
     default:
-        exit("Module " . APP_MODULE . " is not supported in search yet.");
+        exit("Module " . APP_MODULE . " is not supported in search yet.[e:1]");
 }
 
 /*  BEGIN BODY */

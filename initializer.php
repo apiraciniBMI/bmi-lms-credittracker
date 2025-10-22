@@ -8,13 +8,15 @@
  *  redirects where necessary - ex. login page
  * @author    Anthony Piracini <apiracini@buildingmedia.com>
  */
+$module_app = 'module_user'; // needs to be set before config is loaded
+define('APP_MODULE', $module_app);
 // Config file with Globals & Configurations 
-define('APP_MODULE', 'module_user');
 $config_path = $_SERVER['DOCUMENT_ROOT'] . '/core/config/';
-// echo "INITIALIZER: config = " . $config_path . 'config.php' . "<br>"; exit(); 
+// echo "INITIALIZER: config = " . $config_path . 'config.php' . "<br>";
+// echo file_exists($config_path . 'config.php') ? "Config file found.<br>" : "Config file NOT found!<br>";
 require($config_path . 'config.php'); 
+
 $module_web_root = SITE_WEB['ROOT'];
-$module_app = MODULE['SITE'];
 
 // Loads all required Classes & Helpers 
 $initializers = array( 	// NOTE: Please put this list in alphabetical order
@@ -35,7 +37,6 @@ Mustache_Autoloader::register(); // required for Mustache library
 // Initialize i18n
 $i18n = I18n::getInstance();
 $languageSwitcher = new LanguageSwitcher($i18n);
-
 
 // Instances of classes that can be shared globally
 $MUSTACHE_ENGINE = new Mustache_Engine(array(

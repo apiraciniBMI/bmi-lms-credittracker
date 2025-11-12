@@ -86,7 +86,7 @@ if(!$is_script) {
 		redirect_secure_pages(CREDITTRACKER_GUEST_PAGES, CREDITTRACKER_WEB_ROOT . 'login.php');
 	} else {
 		if(RUNNING_SCRIPT != 'login.php') {
-			redirect_no_access_module($app_module_redirect, [LMS_ROLES['lms_specialist'],LMS_ROLES['lms_proctor'],LMS_ROLES['lms_distributor'],LMS_ROLES['lms_team_leader'],LMS_ROLES['lms_teacher'],LMS_ROLES['lms_editor'],LMS_ROLES['lms_regional_mgr'],LMS_ROLES['lms_grader'],LMS_ROLES['lms_student']], $oUser, $module_web_root . 'index.php');
+			redirect_no_access_module($app_module_redirect, '', $oUser, $module_web_root . 'index.php');
 			if(RUNNING_SCRIPT != 'login_code.php') redirect_two_factor(AUTH_SETTING['TWO_FACTOR']['CREDITTRACKER'], $oUser, CREDITTRACKER_WEB_ROOT . 'login_code.php');
 			if(RUNNING_SCRIPT != 'change_password.php') redirect_password_expired(AUTH_SETTING['PASSWORD_EXPIRED']['CREDITTRACKER'], $oUser, AUTH_SETTING['PASSWORD_EXPIRED']['CREDITTRACKER'], CREDITTRACKER_WEB_ROOT . 'change_password.php?e=1');
 		}

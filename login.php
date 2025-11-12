@@ -31,14 +31,12 @@ $dashboard->startDashboard('dashboard-testing');
 
 /*  BEGIN HEADER */
 $dashboard->startHeader('dashboard-navmenu');
-switch(getSession('LAST_MODULE')) {
-	case MODULE['SITE']:
-	default:
-		$header_config = Header::prepareMenuItems(SITE_HEADER_CONFIG);
-}
+$user_id = getSession(SESSION_USERID_KEY);
+$header_config = $TOPNAV_MENU;
 unset($header_config['top_nav_bar']);
 unset($header_config['search_icon']);
-$header_config = Header::prepareMenuItems($header_config);
+$header_config = Header::prepareMenuItems($TOPNAV_MENU, $user_id);
+$header_config['top_nav_bar'] = Header::unsetSecureMenuItems($header_config['top_nav_bar'], $user_id);
 Header::setActiveMenuItem($header_config['top_nav_bar']);
 $header_content = $MUSTACHE_ENGINE->render('dashboard_navmenu_horizontal', $header_config); // build and display header
 $dashboard->endHeader($header_content);
@@ -106,7 +104,7 @@ if (postrequest()) {
 
 			$oUser = Users::loadUserByUserid($loginUID);
 			switch (true) {
-				case (has_access_module(MODULE['CREDITTRACKER'], [LMS_ROLES['lms_student']], $oUser)):
+				case (has_access_module(MODULE['CREDITTRACKER'], [LMS_ROLES['role_student']], $oUser)):
 					$target_redirect = ($back_url && !str_contains($back_url, 'login.php')) ? $back_url : CREDITTRACKER_WEB_ROOT;
 					$activity_log_content = [
 						'activity_url' => $_SERVER['REQUEST_URI']

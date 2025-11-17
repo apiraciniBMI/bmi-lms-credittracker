@@ -35,7 +35,7 @@ $dashboard->endHeader($header_content);
 switch(APP_MODULE){
     case MODULE['CREDITTRACKER']:
 		$module_web_root = CREDITTRACKER_WEB_ROOT;
-		$visibility_values = getSession('SESSION_VISIBILITY_VALUES');
+		$visibility_values = ["'" . getSession('SESSION_VISIBILITY_VALUES', $vis_abbrev) . "'"];
         break;
     default:
         exit("Module " . APP_MODULE . " is not supported in search yet.[e:1]");

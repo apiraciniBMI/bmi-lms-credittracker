@@ -64,14 +64,19 @@ if (in_array(RUNNING_SCRIPT, array("run_overnight_scripts.php", "overnight_scrip
 	setSession(SESSION_USERID_KEY, SCRIPT_USER);
 }
 
-// User Session
-$oUser = Users::loadUserByUserid(getSession(SESSION_USERID_KEY, '0'));
-if ($oUser !== false && $oUser::$user_id !== '0') {
-	setSession(SESSION_USERID_KEY, $oUser::$user_id);
-	setSession('SESSION_VISIBILITY_VALUES', $oUser::$visibility_values);
-} else {
-	setSession(SESSION_USERID_KEY, '0');
-	setSession('SESSION_VISIBILITY_VALUES', VISIBILITY_VALUES_DEFAULT);
+$sessionUserId = getSession(SESSION_USERID_KEY, '0');
+$isAnonymousUser = AnonymousUser::isAnonymousUser();
+
+if(!$isAnonymousUser) {
+	// User Session
+	$oUser = Users::loadUserByUserid(getSession(SESSION_USERID_KEY, '0'));
+	if ($oUser !== false && $oUser::$user_id !== '0') {
+		setSession(SESSION_USERID_KEY, $oUser::$user_id);
+		setSession('SESSION_VISIBILITY_VALUES', $oUser::$visibility_values);
+	} else {
+		setSession(SESSION_USERID_KEY, '0');
+		setSession('SESSION_VISIBILITY_VALUES', (array) (!AnonymousUser::isAnonymousUser() ? VISIBILITY_VALUES_DEFAULT : VISIBILITY_ANONYMOUS_VALUES_DEFAULT));
+	}
 }
 
 switch(getSession('LAST_MODULE')) {

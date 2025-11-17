@@ -31,7 +31,7 @@ abstract class creditTracker {
     private static function getWelcomeMessage() {
         return '<h1>' . t('credit_tracker.my_credits') . '</h1>';
     }
-    private static $course_type_all_courses = ['article', 'podcast', 'multimedia', 'webinar'];
+    private static $course_type_all_courses = ['article', 'course', 'podcast', 'multimedia', 'webinar'];
     private static $course_type_all_online = ['article', 'podcast', 'multimedia'];
     private static $course_type_all_webinars = ['webinar'];
     private static $course_type_all_lunchandlearns = ['lunchandlearn'];
